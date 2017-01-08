@@ -1,0 +1,13 @@
+---
+- name: Include OS specific variables
+  include: "vars-{{ item }}.yml"
+  with_first_found:
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}"
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}"
+    - "family-{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}"
+    - "family-{{ ansible_os_family | lower }}"
+
+- name: Install ServerSpec Test Dependencies
+  package:
+    name: "{{ item }}"
+    state: present
