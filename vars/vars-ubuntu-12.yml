@@ -1,0 +1,4 @@
+---
+serverspec_test_dependencies:
+  - iproute
+  - net-tools
