@@ -16,12 +16,6 @@ install:
   # Install pre-commit
   - pip install pre-commit
 
-  # Install ansible
-  - pip install ansible
-
-  # Check ansible version
-  - ansible --version
-
   # Create ansible.cfg with correct roles_path
   - printf '[defaults]\nroles_path=../' >ansible.cfg
 

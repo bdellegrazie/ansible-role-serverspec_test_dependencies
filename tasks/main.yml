@@ -11,3 +11,4 @@
   package:
     name: "{{ item }}"
     state: present
+  with_items: "{{ serverspec_test_dependencies }}"
