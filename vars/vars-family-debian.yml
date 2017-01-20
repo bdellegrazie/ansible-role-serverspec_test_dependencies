@@ -2,3 +2,4 @@
 serverspec_test_dependencies:
   - iproute2
   - net-tools
+  - openssl

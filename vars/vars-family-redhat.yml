@@ -1,3 +1,4 @@
 ---
 serverspec_test_dependencies:
   - iproute
+  - openssl
