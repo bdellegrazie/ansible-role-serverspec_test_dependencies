@@ -12,6 +12,9 @@ addons:
     packages:
     - python-pip
 
+before_cache:
+  - rm -f $HOME/.cache/pip/log/debug.log
+
 install:
   # Install pre-commit
   - pip install pre-commit
