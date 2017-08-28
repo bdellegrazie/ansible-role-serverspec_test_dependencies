@@ -1,4 +1,5 @@
 ---
 serverspec_test_dependencies:
+  - cronie
   - iproute
   - openssl
