@@ -1,30 +1,56 @@
 ---
 dist: trusty
-language: python
-python: "2.7"
+sudo: required
+env:
+  matrix:
+    - distro: centos7
+    - distro: centos6
+    - distro: fedora27
+    - distro: ubuntu1804
+    - distro: ubuntu1604
+    - distro: ubuntu1404
+    - distro: ubuntu1204
+    - distro: debian9
+    - distro: debian8
 
-# Use the new container infrastructure
-sudo: false
-
-# Install ansible
-addons:
-  apt:
-    packages:
-    - python-pip
+language: ruby
+bundler_args: --without=development --binstubs=vendor/bin
+cache:
+  bundler: true
+  directories:
+    - $HOME/.cache/pip
+    - $HOME/.inspec/cache
 
 before_cache:
   - rm -f $HOME/.cache/pip/log/debug.log
 
-install:
-  # Install pre-commit
-  - pip install pre-commit
+services:
+  - docker
 
-  # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path=../' >ansible.cfg
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
 script:
-  # Basic role syntax check
-  - pre-commit run --all-files
+  # Configure test script so we can run extra tests after playbook is run.
+  - export container_id=$(date +%s)
+
+  # Download test shim.
+  - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/geerlingguy/73ef1e5ee45d8694570f334be385e181/raw/
+  - chmod +x ${PWD}/tests/test.sh
+
+  # Run tests.
+  - ${PWD}/tests/test.sh
+stages:
+  - lint
+  - test
+
+jobs:
+  include:
+    - stage: lint
+      before_install: pip install --user pre-commit
+      install: pre-commit install
+      script: pre-commit run --all-files
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
