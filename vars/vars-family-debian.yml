@@ -1,6 +1,7 @@
 ---
 serverspec_test_dependencies:
-  - systemd-cron
+  - curl
   - iproute2
   - net-tools
   - openssl
+  - systemd-cron

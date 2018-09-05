@@ -2,5 +2,6 @@
 serverspec_test_dependencies:
   - anacron
   - cron
+  - curl
   - iproute
   - net-tools
