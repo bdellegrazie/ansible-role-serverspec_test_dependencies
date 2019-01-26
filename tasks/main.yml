@@ -12,6 +12,8 @@
   apt:
     update_cache: yes
     cache_valid_time: 3600
+  register: _apt_update
+  until: _apt_update is succeeded
   when: (ansible_os_family | lower) == 'debian'
 
 - name: Install ServerSpec Test Dependencies
@@ -19,3 +21,5 @@
   package:
     name: "{{ serverspec_test_dependencies }}"
     state: present
+  register: _install
+  until: _install is succeeded

@@ -1,5 +1,5 @@
 ---
-dist: trusty
+dist: xenial
 sudo: required
 env:
   matrix:
@@ -9,7 +9,7 @@ env:
     - distro: ubuntu1804
     - distro: ubuntu1604
     - distro: ubuntu1404
-    - distro: ubuntu1204
+    #- distro: ubuntu1204 - container no longer boots
     - distro: debian9
     - distro: debian8
 
@@ -48,7 +48,11 @@ stages:
 jobs:
   include:
     - stage: lint
-      before_install: pip install --user pre-commit
+      before_install: |
+        echo "PATH=$PATH"
+        pip install --user -U pip
+        pip install --user pre-commit
+        ls -la $HOME/.local/bin/
       install: pre-commit install
       script: pre-commit run --all-files
 
