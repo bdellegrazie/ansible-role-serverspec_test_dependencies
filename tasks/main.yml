@@ -8,14 +8,14 @@
     - "vars-family-{{ ansible_os_family | lower }}.yml"
 
 - name: Update apt cache
+  become: true
   apt:
     update_cache: yes
     cache_valid_time: 3600
   when: (ansible_os_family | lower) == 'debian'
 
 - name: Install ServerSpec Test Dependencies
-  package:
-    name: "{{ item }}"
-    state: present
   become: true
-  with_items: "{{ serverspec_test_dependencies }}"
+  package:
+    name: "{{ serverspec_test_dependencies }}"
+    state: present
