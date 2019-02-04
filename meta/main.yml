@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Brett Delle Grazie
   description: Dependencies needed to execute ServerSpec tests on the target
@@ -7,18 +8,18 @@ galaxy_info:
   min_ansible_version: 2.0
 
   platforms:
-  - name: Fedora
-    versions:
-    - all
-  - name: Ubuntu
-    versions:
-    - all
-  - name: Debian
-    versions:
-    - all
-  - name: EL
-    versions:
-    - all
+    - name: Fedora
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+    - name: EL
+      versions:
+        - all
 
   galaxy_tags:
     - serverspec

@@ -14,7 +14,8 @@
     cache_valid_time: 3600
   register: _apt_update
   until: _apt_update is succeeded
-  when: (ansible_os_family | lower) == 'debian'
+  retries: 3
+  when: ((ansible_os_family | lower) == 'debian')
 
 - name: Install ServerSpec Test Dependencies
   become: true
