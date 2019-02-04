@@ -1,0 +1,7 @@
+docker
+.dockerignore
+galaxy
+.git*
+.pre-commit-config.yaml
+*.md
+.travis.yml
